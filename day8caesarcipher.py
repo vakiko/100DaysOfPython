@@ -44,14 +44,17 @@ while(True):
     text = input("Type your message:\n").lower()
     shift = int(input("Type the shift number:\n"))
     list1 = list(text)
+    shift = shift%26
     if direction.lower() == 'encode':
         encrypt(text,shift)
         print("Your encoded message is ", end='')
         print(''.join(list1), end = '.')
     elif direction.lower() == 'decode':
         decrypt(text,shift)
-        print("Your decoded message is", end='')
+        print("Your decoded message is ", end='')
         print(''.join(list1), end = '.')
     status = input("Type 'n' to quit, or any other letter to continue.")
     if status.lower() == 'n':
         break
+    print('')
+    
