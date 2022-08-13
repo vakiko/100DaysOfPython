@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Fri Aug 12 22:12:21 2022
+
+@author: victo
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Thu Aug 11 00:07:29 2022
 
 @author: victo
@@ -11,105 +18,75 @@ from art import logo
 print(logo)
 print("Howdy! Welcome to Blackjack.")
 print("Unlike Angela Yu's house rules, this will have a 52-card deck.")
-print("Aces count as 1.")
+print("Aces count as 11, unless the total exceeds 21 - in such a case, it counts as 1.")
 print("The dealer will draw another card if their total is < 17.")
 print("Untill then, have fun!")
 
 
-def drawCard():
-    print("Drawing card...")
+def drawCard(num = 1):
     global deck
-    
-    newCard = random.choice(deck)
-    deck.remove(newCard)
-    
-    return newCard
+    newCards = []
+    print("Drawing", num, "card(s)...")
+    while num != 0:   
+        newCard = random.choice(deck)
+        deck.remove(newCard)
+        newCards.append(newCard)
+        num -=1
+    return newCards
+
+def results(hand):
+    if 1 in hand and sum(hand) < 21:
+        hand.remove(1)
+        hand.append(11)
+    return sum(hand)
     
 #dealer - first card
 #totdea - total of the dealer
 def blackjack():
-    hand = []
+    user = []
     dealer = []
     pun = ".\n"
+    gameOver = False
     
-    hand.append(drawCard())
-    hand.append(drawCard())
-    dealer.append(drawCard())
-    dealer.append(drawCard())
+    user.extend(drawCard(2))
+    dealer.extend(drawCard(2))
     
-    status = False
-    total = 0
-    totdea = 0
-    
-    total = sum(hand)
-    totdea = sum(dealer)
-    
-    print("Your current hand is", hand, end = pun)
-    print("Your total is", total, end = pun)
-    print("Your dealer's first card is", dealer[0], end = pun)
-    
-    if total > 21:
-        print("Ohhh, you busted on draw - unlucky! Better luck next time.")
-        return
-    if total == 21:
-        print("Woah, lucky! Congratulations, you won.")
-        return
-    
-    redo = input("Draw again (Y/N): ").lower()
-    
-    if redo == 'y': status = True
-    
-    while status:
-
-        draw = drawCard()
-        print("You have drawn", draw, end = pun)
-        total += draw
-        hand.append(draw)
-
-        print("Your current hand is", hand, end = pun)
-        print("Your total is", total, end = pun)
-        if total >= 21:
+    while not gameOver:
+        userTotal = results(user)
+        dealerTotal = results(dealer)
+        print("Your hand is", user, end = pun)
+        print("The dealer's first card is", dealer[0], end = pun)
+        if userTotal >= 21 or dealerTotal >= 21:
+            gameOver = True
             break
+            
+        ans = input("Would you like to draw another card?").lower()
+        if ans == 'y':
+            draw = drawCard()
+            print("You have drawn", draw, end = pun)
+            user.extend(draw)
         else:
-            redo = input("Draw again (Y/N): ").lower()
-            if redo == 'n':
-                break
-    
-
-    print("The dealer has a total of", totdea, end = pun)
-    print("Their hand is", dealer, end = pun)
-    
-    if total > 21:
-        print("Sorry, it's a bust. Better luck next time!")
-        return
-    
-    if totdea < 17:
-        print("The dealer has to draw another card - their total is less than 17.")
-        draw = drawCard()
-        totdea += draw
-        dealer.append(draw)
-        print("The dealer drew", draw, end = pun)
-        print("Their hand is", dealer, end = pun)
-        print("The dealer has a total of", totdea, end = pun)
+            gameOver = True
+            
+    if gameOver:
+        while dealerTotal < 17:
+            print("The dealer is drawing another card...")
+            draw = drawCard()
+            dealer.extend(draw)
+            dealerTotal = results(dealer)
         
-    if totdea >= 21:
-        print("The dealer busted! You won.")
-        return
-    
-    if total == 21:
-        print("Congratulations! You've won.")
-        return 
-    if totdea == total:
-        print("It's a tie. Better luck next time!")
-        return
-    elif totdea < total:
-        print("Congratulations! You've won.")
-        return
-    else:
-        print("Sorry, you've lost. Better luck next time!")
-        return
-
-
+        if dealerTotal == 21 or dealerTotal >= userTotal or userTotal > 21:
+            print("Sorry, you've lost!")
+        else:
+            print("Congratulations - you won!")   
+         
+    print("You had a hand of", user)
+    print("The dealer had a hand of", dealer)
+        
+    print("You finished with a total of", userTotal, end = pun)
+    print("The dealer finished with a total of", dealerTotal, end = pun)
+    print("-----------------------------------------------------------")
+        
     
 while(True):
 

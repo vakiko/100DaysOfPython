@@ -10,4 +10,4 @@ Added a bit more to hangman game to account for invalid inputs & caesar cipher.
 Forgot to write an entry here, but I did day 9 (secret auction) - I was mostly just studying for an exam :)
 
 8/10/22
-Did day 10 - calculator that takes two inputs. I've been a bit behind on Bjarne so I will catch up on at least 80 or so pages tomorrow. I will see what I can get done concerning day 11 - the blackjack project. I mostly just want to skip to the Tinder auto-swiper & the flight tracker but those are a bit ahead;;
+Did day 10 - calculator that takes two inputs. I've been a bit behind on Bjarne so I will catch up on at least 80 or so pages tomorrow. I will see what I can get done concerning day 11 - the blackjack project. I mostly just want to skip to the Tinder auto-swiper & the flight tracker but those are a bit ahead;; Did day 11! (technically its the 11th but eh-)
