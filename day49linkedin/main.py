@@ -21,8 +21,6 @@ driver = webdriver.Chrome(executable_path=chrome_driver_path)
 URL =  "https://www.linkedin.com/jobs/search/?currentJobId=3321807606&f_AL=true&f_E=1&geoId=92000000&keywords=engineer%20intern%202023&location=Worldwide&refresh=true&sortBy=R/"
 driver.get(URL)
 
-print(os.getenv("username"))
-
 time.sleep(4)
 driver.find_element(by=By.CLASS_NAME, value="nav__button-secondary").click()
 driver.find_element(by=By.ID, value="username").send_keys(os.getenv("USER"))
