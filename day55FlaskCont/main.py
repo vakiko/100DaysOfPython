@@ -4,11 +4,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return "Hello, world!
+    return "Hello, world!"
 
 @app.route('/bye')
 def bye():
-    return "Bye, world!
+    return "Bye, world!"
     
     
 if __name__ == "__main__":

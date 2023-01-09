@@ -10,7 +10,7 @@ USER_AGENT = "Mozilla/5.0"
 ACCEPT_LANGUAGE = "en-US,en;q=0.9"
 
 MY_EMAIL = os.environ.get('MY_EMAIL')
-MY_PASSWORD = os.environ.get('MY_PASSWORD')
+MY_PASSWORD = os.environ.get('PASSWORD')
 
 headers = requests.utils.default_headers()
 
